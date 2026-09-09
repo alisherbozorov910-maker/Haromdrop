@@ -1,0 +1,214 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #0f111a;
+  color: #fff;
+  min-height: 100vh;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Auth Styling */
+.auth-box {
+  background: #1a1d29;
+  padding: 30px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border: 1px solid #2a2e3d;
+}
+
+.auth-box h1 {
+  color: #00e676;
+  margin-bottom: 10px;
+}
+
+.auth-box p {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.auth-box input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: #0f111a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #fff;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  flex: 1;
+  padding: 12px;
+  font-weight: bold;
+  background: #00e676;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.secondary-btn {
+  background: #2a2e3d;
+  color: #fff;
+}
+
+.logout-btn {
+  background: #ff5252;
+  color: #fff;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  flex: none;
+}
+
+.msg {
+  margin-top: 15px;
+  font-size: 0.85rem;
+  color: #ff5252;
+}
+
+/* Game Header */
+header {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1a1d29;
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+}
+
+.balance-box {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+/* Cases Grid */
+.container {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.case-card {
+  background: #1a1d29;
+  padding: 20px;
+  border-radius: 12px;
+  border: 2px solid #333;
+  transition: transform 0.2s;
+}
+
+.case-card:hover {
+  transform: translateY(-5px);
+}
+
+.case-card.iron { border-color: #7f8c8d; }
+.case-card.gold { border-color: #f1c40f; }
+.case-card.diamond { border-color: #3498db; }
+
+.price {
+  color: #ffd700;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+/* Roulette */
+.case-box {
+  background: #1a1d29;
+  padding: 20px;
+  border-radius: 16px;
+  margin-top: 20px;
+}
+
+.roulette-wrapper {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  background: #0b0c10;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #333;
+  margin-top: 15px;
+}
+
+.pointer {
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 4px;
+  background: #ff5252;
+  z-index: 10;
+  transform: translateX(-50%);
+}
+
+.roulette {
+  display: flex;
+  height: 100%;
+  position: absolute;
+  left: 0;
+}
+
+.item-card {
+  min-width: 100px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px solid #1a1d29;
+  font-weight: bold;
+  font-size: 0.8rem;
+  padding: 5px;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background: #1a1d29;
+  padding: 30px;
+  border-radius: 16px;
+  border: 2px solid #00e676;
+  text-align: center;
+}
+
