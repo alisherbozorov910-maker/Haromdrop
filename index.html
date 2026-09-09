@@ -1,297 +1,925 @@
-<!DOCTYPE html>
+<@   <!DOCTYPE html>
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>CaseDrop</title>
 
 <style>
-* {
-    box-sizing: border-box;
+
+*{
+    box-sizing:border-box;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0b0d14;
-    color: white;
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#080a10;
+    color:white;
 }
 
-header {
-    padding: 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #121522;
-    border-bottom: 1px solid #252a3a;
+/* AUTH */
+
+.auth{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
 }
 
-.logo {
-    font-size: 24px;
-    font-weight: bold;
+.auth-box{
+    width:100%;
+    max-width:400px;
+    background:#111520;
+    border:1px solid #252b3b;
+    border-radius:22px;
+    padding:30px 25px;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
 }
 
-.coins {
-    background: #1d2333;
-    padding: 9px 14px;
-    border-radius: 12px;
+.logo{
+    text-align:center;
+    font-size:32px;
+    font-weight:bold;
+    margin-bottom:8px;
 }
 
-.container {
-    padding: 25px 15px;
-    max-width: 900px;
-    margin: auto;
+.subtitle{
+    text-align:center;
+    color:#8d95a8;
+    margin-bottom:25px;
 }
 
-h1 {
-    text-align: center;
+.tabs{
+    display:flex;
+    background:#0a0d14;
+    padding:5px;
+    border-radius:12px;
+    margin-bottom:20px;
 }
 
-.subtitle {
-    text-align: center;
-    color: #9299ad;
+.tabs button{
+    flex:1;
+    background:transparent;
+    color:#8d95a8;
+    border:0;
+    padding:11px;
+    border-radius:9px;
 }
 
-.cases {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-top: 25px;
+.tabs .active{
+    background:#5865f2;
+    color:white;
 }
 
-.case {
-    background: #151927;
-    border: 1px solid #292f42;
-    border-radius: 18px;
-    padding: 20px;
-    text-align: center;
-    transition: 0.2s;
+.form{
+    display:none;
 }
 
-.case:hover {
-    transform: translateY(-4px);
-    border-color: #6574ff;
+.form.active{
+    display:block;
 }
 
-.case-icon {
-    font-size: 65px;
-    margin: 10px;
+input{
+    width:100%;
+    padding:14px;
+    margin-bottom:12px;
+    border-radius:11px;
+    border:1px solid #2b3244;
+    background:#0a0d14;
+    color:white;
+    outline:none;
 }
 
-.case h2 {
-    margin: 8px 0;
+input:focus{
+    border-color:#5865f2;
 }
 
-.case p {
-    color: #9299ad;
+.main-btn{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:11px;
+    background:#5865f2;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-button {
-    width: 100%;
-    padding: 13px;
-    border: 0;
-    border-radius: 12px;
-    background: #5865f2;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+.message{
+    text-align:center;
+    margin-top:15px;
+    color:#ff7676;
+    min-height:20px;
 }
 
-button:hover {
-    background: #6975ff;
+/* MAIN SITE */
+
+#site{
+    display:none;
 }
 
-.inventory {
-    margin-top: 35px;
-    background: #111522;
-    padding: 20px;
-    border-radius: 18px;
+header{
+    height:65px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 18px;
+    background:#111520;
+    border-bottom:1px solid #252b3b;
 }
 
-#result {
-    margin-top: 25px;
-    text-align: center;
-    min-height: 80px;
+.header-logo{
+    font-size:22px;
+    font-weight:bold;
 }
 
-.item {
-    display: inline-block;
-    background: #1b2030;
-    border-radius: 15px;
-    padding: 18px 25px;
-    font-size: 20px;
+.user{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-.rarity {
-    color: #ffd166;
-    font-size: 14px;
-    margin-top: 5px;
+.coin{
+    background:#202638;
+    padding:9px 13px;
+    border-radius:10px;
 }
 
-@media(max-width:600px) {
-    .cases {
-        grid-template-columns: 1fr;
+.logout{
+    background:#252b3b;
+    border:0;
+    color:white;
+    padding:9px 12px;
+    border-radius:10px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+.welcome{
+    background:#111520;
+    border:1px solid #252b3b;
+    border-radius:18px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.welcome h2{
+    margin:0 0 5px;
+}
+
+.welcome p{
+    margin:0;
+    color:#8d95a8;
+}
+
+.cases{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.case{
+    background:#111520;
+    border:1px solid #252b3b;
+    border-radius:18px;
+    padding:22px;
+    text-align:center;
+}
+
+.case-icon{
+    font-size:60px;
+}
+
+.case h3{
+    margin:10px 0 5px;
+}
+
+.case p{
+    color:#8d95a8;
+}
+
+.case button{
+    width:100%;
+    padding:12px;
+    border:0;
+    border-radius:10px;
+    background:#5865f2;
+    color:white;
+    font-weight:bold;
+}
+
+#result{
+    text-align:center;
+    margin:25px 0;
+}
+
+.result-item{
+    display:inline-block;
+    padding:20px 30px;
+    background:#171c2a;
+    border-radius:18px;
+    font-size:22px;
+}
+
+.inventory{
+    background:#111520;
+    border:1px solid #252b3b;
+    border-radius:18px;
+    padding:20px;
+}
+
+.item{
+    background:#1b2130;
+    padding:10px;
+    margin:6px 0;
+    border-radius:10px;
+}
+
+@media(max-width:600px){
+
+    .cases{
+        grid-template-columns:1fr;
     }
+
 }
+
 </style>
 </head>
 
 <body>
 
+
+<!-- LOGIN / REGISTER -->
+
+<div class="auth" id="auth">
+
+<div class="auth-box">
+
+<div class="logo">🎁 CaseDrop</div>
+
+<div class="subtitle">
+Virtual Case Opening
+</div>
+
+
+<div class="tabs">
+
+<button id="loginTab"
+class="active"
+onclick="showLogin()">
+Kirish
+</button>
+
+<button id="registerTab"
+onclick="showRegister()">
+Yangi hisob
+</button>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<div class="form active" id="loginForm">
+
+<input
+id="loginUser"
+placeholder="Username yoki Email"
+>
+
+<input
+id="loginPassword"
+type="password"
+placeholder="Parol"
+>
+
+<button
+class="main-btn"
+onclick="login()">
+KIRISH
+</button>
+
+</div>
+
+
+<!-- REGISTER -->
+
+<div class="form" id="registerForm">
+
+<input
+id="regUsername"
+placeholder="Username"
+>
+
+<input
+id="regEmail"
+type="email"
+placeholder="Email"
+>
+
+<input
+id="regPassword"
+type="password"
+placeholder="Parol"
+>
+
+<input
+id="regPassword2"
+type="password"
+placeholder="Parolni tasdiqlang"
+>
+
+<button
+class="main-btn"
+onclick="register()">
+HISOB OCHISH
+</button>
+
+</div>
+
+
+<div
+class="message"
+id="message">
+</div>
+
+</div>
+
+</div>
+
+
+<!-- MAIN SITE -->
+
+<div id="site">
+
 <header>
-    <div class="logo">🎁 CaseDrop</div>
-    <div class="coins">🪙 <span id="coins">100</span></div>
+
+<div class="header-logo">
+🎁 CaseDrop
+</div>
+
+<div class="user">
+
+<div class="coin">
+🪙 <span id="coins">100</span>
+</div>
+
+<button
+class="logout"
+onclick="logout()">
+Chiqish
+</button>
+
+</div>
+
 </header>
+
 
 <div class="container">
 
-<h1>Virtual Case Opening</h1>
-<p class="subtitle">
-    Case oching va noyob collectible'larni yig'ing!
+<div class="welcome">
+
+<h2>
+Salom, <span id="username"></span> 👋
+</h2>
+
+<p>
+Case oching va virtual collectible'lar yig'ing!
 </p>
+
+</div>
+
 
 <div class="cases">
 
-<div class="case">
-    <div class="case-icon">📦</div>
-    <h2>Starter Case</h2>
-    <p>10 🪙</p>
-    <button onclick="openCase(10, 'starter')">
-        CASE OCHISH
-    </button>
-</div>
 
 <div class="case">
-    <div class="case-icon">💎</div>
-    <h2>Diamond Case</h2>
-    <p>25 🪙</p>
-    <button onclick="openCase(25, 'diamond')">
-        CASE OCHISH
-    </button>
+
+<div class="case-icon">
+📦
 </div>
+
+<h3>
+Starter Case
+</h3>
+
+<p>
+10 🪙
+</p>
+
+<button onclick="openCase(10,'starter')">
+OCHISH
+</button>
+
+</div>
+
 
 <div class="case">
-    <div class="case-icon">🔥</div>
-    <h2>Legendary Case</h2>
-    <p>50 🪙</p>
-    <button onclick="openCase(50, 'legendary')">
-        CASE OCHISH
-    </button>
+
+<div class="case-icon">
+💎
 </div>
+
+<h3>
+Diamond Case
+</h3>
+
+<p>
+25 🪙
+</p>
+
+<button onclick="openCase(25,'diamond')">
+OCHISH
+</button>
+
+</div>
+
 
 <div class="case">
-    <div class="case-icon">🌌</div>
-    <h2>Galaxy Case</h2>
-    <p>75 🪙</p>
-    <button onclick="openCase(75, 'galaxy')">
-        CASE OCHISH
-    </button>
+
+<div class="case-icon">
+🔥
 </div>
 
+<h3>
+Legendary Case
+</h3>
+
+<p>
+50 🪙
+</p>
+
+<button onclick="openCase(50,'legendary')">
+OCHISH
+</button>
+
 </div>
+
+
+<div class="case">
+
+<div class="case-icon">
+🌌
+</div>
+
+<h3>
+Galaxy Case
+</h3>
+
+<p>
+75 🪙
+</p>
+
+<button onclick="openCase(75,'galaxy')">
+OCHISH
+</button>
+
+</div>
+
+
+</div>
+
 
 <div id="result">
-    Case ochib, sovg'angizni oling! 🎁
+Case ochib ko'ring! 🎁
 </div>
+
 
 <div class="inventory">
-    <h2>🎒 Inventar</h2>
-    <div id="inventory">
-        Hozircha item yo'q.
-    </div>
+
+<h2>
+🎒 Inventar
+</h2>
+
+<div id="inventory">
+Hozircha item yo'q.
 </div>
 
 </div>
+
+</div>
+
+</div>
+
 
 <script>
 
-let coins = 100;
-let inventory = [];
+/* TAB */
 
-const items = {
+function showLogin(){
 
-starter: [
-    ["🎨 Common Avatar", "Common"],
-    ["🎧 Headphones", "Rare"],
-    ["🎮 Gamepad", "Epic"],
-    ["👑 Golden Crown", "Legendary"]
+    document.getElementById("loginForm")
+    .classList.add("active");
+
+    document.getElementById("registerForm")
+    .classList.remove("active");
+
+    document.getElementById("loginTab")
+    .classList.add("active");
+
+    document.getElementById("registerTab")
+    .classList.remove("active");
+
+    clearMessage();
+}
+
+
+function showRegister(){
+
+    document.getElementById("registerForm")
+    .classList.add("active");
+
+    document.getElementById("loginForm")
+    .classList.remove("active");
+
+    document.getElementById("registerTab")
+    .classList.add("active");
+
+    document.getElementById("loginTab")
+    .classList.remove("active");
+
+    clearMessage();
+}
+
+
+/* MESSAGE */
+
+function message(text){
+
+    document.getElementById("message")
+    .innerText=text;
+
+}
+
+function clearMessage(){
+
+    document.getElementById("message")
+    .innerText="";
+
+}
+
+
+/* REGISTER */
+
+function register(){
+
+    let username =
+        document.getElementById("regUsername").value.trim();
+
+    let email =
+        document.getElementById("regEmail").value.trim();
+
+    let password =
+        document.getElementById("regPassword").value;
+
+    let password2 =
+        document.getElementById("regPassword2").value;
+
+
+    if(!username || !email || !password){
+
+        message("❌ Barcha maydonlarni to'ldiring!");
+
+        return;
+    }
+
+
+    if(password.length < 6){
+
+        message("❌ Parol kamida 6 ta belgidan iborat bo'lsin!");
+
+        return;
+    }
+
+
+    if(password !== password2){
+
+        message("❌ Parollar bir xil emas!");
+
+        return;
+    }
+
+
+    let users =
+        JSON.parse(localStorage.getItem("users") || "[]");
+
+
+    let exists =
+        users.find(
+            u =>
+            u.username === username ||
+            u.email === email
+        );
+
+
+    if(exists){
+
+        message("❌ Bu username yoki email allaqachon mavjud!");
+
+        return;
+    }
+
+
+    let user={
+
+        username:username,
+        email:email,
+        password:password,
+        coins:100,
+        inventory:[]
+
+    };
+
+
+    users.push(user);
+
+
+    localStorage.setItem(
+        "users",
+        JSON.stringify(users)
+    );
+
+
+    message("✅ Hisob yaratildi! Endi kiring.");
+
+    setTimeout(showLogin,1000);
+
+}
+
+
+/* LOGIN */
+
+function login(){
+
+    let login =
+        document.getElementById("loginUser").value.trim();
+
+    let password =
+        document.getElementById("loginPassword").value;
+
+
+    let users =
+        JSON.parse(localStorage.getItem("users") || "[]");
+
+
+    let user =
+        users.find(
+            u =>
+            (u.username === login ||
+             u.email === login)
+            &&
+            u.password === password
+        );
+
+
+    if(!user){
+
+        message("❌ Username/email yoki parol noto'g'ri!");
+
+        return;
+    }
+
+
+    localStorage.setItem(
+        "currentUser",
+        user.username
+    );
+
+
+    openSite(user);
+
+}
+
+
+/* OPEN SITE */
+
+function openSite(user){
+
+    document.getElementById("auth")
+    .style.display="none";
+
+    document.getElementById("site")
+    .style.display="block";
+
+    document.getElementById("username")
+    .innerText=user.username;
+
+    document.getElementById("coins")
+    .innerText=user.coins;
+
+    updateInventory();
+
+}
+
+
+/* LOGOUT */
+
+function logout(){
+
+    localStorage.removeItem("currentUser");
+
+    location.reload();
+
+}
+
+
+/* CASE ITEMS */
+
+const items={
+
+starter:[
+["🎨 Common Avatar","Common"],
+["🎧 Headphones","Rare"],
+["🎮 Gamepad","Epic"],
+["👑 Golden Crown","Legendary"]
 ],
 
-diamond: [
-    ["💎 Diamond", "Rare"],
-    ["📱 Golden Phone", "Epic"],
-    ["🚗 Supercar", "Epic"],
-    ["🐉 Dragon", "Legendary"]
+diamond:[
+["💎 Diamond","Rare"],
+["📱 Golden Phone","Epic"],
+["🚗 Supercar","Epic"],
+["🐉 Dragon","Legendary"]
 ],
 
-legendary: [
-    ["⚡ Lightning Aura", "Epic"],
-    ["🔥 Fire Aura", "Epic"],
-    ["🛸 UFO", "Legendary"],
-    ["👑 Royal Crown", "Legendary"]
+legendary:[
+["⚡ Lightning Aura","Epic"],
+["🔥 Fire Aura","Epic"],
+["🛸 UFO","Legendary"],
+["👑 Royal Crown","Legendary"]
 ],
 
-galaxy: [
-    ["🌌 Galaxy Aura", "Epic"],
-    ["🌑 Black Hole", "Legendary"],
-    ["🐲 Cosmic Dragon", "Legendary"],
-    ["🌟 Galaxy King", "Mythic"]
+galaxy:[
+["🌌 Galaxy Aura","Epic"],
+["🌑 Black Hole","Legendary"],
+["🐲 Cosmic Dragon","Legendary"],
+["🌟 Galaxy King","Mythic"]
 ]
 
 };
 
-function openCase(price, type) {
 
-    if (coins < price) {
+/* OPEN CASE */
+
+function openCase(price,type){
+
+    let username =
+        localStorage.getItem("currentUser");
+
+    let users =
+        JSON.parse(localStorage.getItem("users") || "[]");
+
+    let user =
+        users.find(u => u.username === username);
+
+
+    if(user.coins < price){
+
         alert("🪙 Coin yetarli emas!");
+
         return;
+
     }
 
-    coins -= price;
 
-    document.getElementById("coins").innerText = coins;
+    user.coins -= price;
 
-    let list = items[type];
 
-    let random = Math.floor(Math.random() * list.length);
+    let list=items[type];
 
-    let item = list[random][0];
-    let rarity = list[random][1];
+    let random=
+        Math.floor(Math.random()*list.length);
 
-    let result = document.getElementById("result");
 
-    result.innerHTML = `
-        <div class="item">
-            🎉 ${item}
-            <div class="rarity">${rarity}</div>
+    let item=list[random][0];
+
+    let rarity=list[random][1];
+
+
+    user.inventory.push(item);
+
+
+    localStorage.setItem(
+        "users",
+        JSON.stringify(users)
+    );
+
+
+    document.getElementById("coins")
+    .innerText=user.coins;
+
+
+    document.getElementById("result")
+    .innerHTML=`
+
+        <div class="result-item">
+
+        🎉 ${item}
+
+        <br>
+
+        <small>${rarity}</small>
+
         </div>
+
     `;
 
-    inventory.push(item);
 
     updateInventory();
+
 }
 
-function updateInventory() {
 
-    let box = document.getElementById("inventory");
+/* INVENTORY */
 
-    box.innerHTML = "";
+function updateInventory(){
 
-    inventory.forEach(function(item) {
+    let username =
+        localStorage.getItem("currentUser");
 
-        let div = document.createElement("div");
+    let users =
+        JSON.parse(localStorage.getItem("users") || "[]");
 
-        div.style.padding = "8px";
-        div.innerText = "🎁 " + item;
+    let user =
+        users.find(u => u.username === username);
+
+
+    if(!user) return;
+
+
+    let box =
+        document.getElementById("inventory");
+
+
+    if(user.inventory.length === 0){
+
+        box.innerHTML="Hozircha item yo'q.";
+
+        return;
+
+    }
+
+
+    box.innerHTML="";
+
+
+    user.inventory
+    .slice()
+    .reverse()
+    .forEach(item=>{
+
+        let div=
+            document.createElement("div");
+
+        div.className="item";
+
+        div.innerText="🎁 "+item;
 
         box.appendChild(div);
 
     });
+
 }
+
+
+/* AUTO LOGIN */
+
+window.onload=function(){
+
+    let username =
+        localStorage.getItem("currentUser");
+
+
+    if(username){
+
+        let users =
+            JSON.parse(
+                localStorage.getItem("users") || "[]"
+            );
+
+
+        let user =
+            users.find(u=>u.username===username);
+
+
+        if(user){
+
+            openSite(user);
+
+        }
+
+    }
+
+};
 
 </script>
 
 </body>
-  </html>
+</html>
