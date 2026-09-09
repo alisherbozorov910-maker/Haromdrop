@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CaseDrop</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b0d14;
+    color: white;
+}
+
+header {
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #121522;
+    border-bottom: 1px solid #252a3a;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.coins {
+    background: #1d2333;
+    padding: 9px 14px;
+    border-radius: 12px;
+}
+
+.container {
+    padding: 25px 15px;
+    max-width: 900px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: #9299ad;
+}
+
+.cases {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.case {
+    background: #151927;
+    border: 1px solid #292f42;
+    border-radius: 18px;
+    padding: 20px;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.case:hover {
+    transform: translateY(-4px);
+    border-color: #6574ff;
+}
+
+.case-icon {
+    font-size: 65px;
+    margin: 10px;
+}
+
+.case h2 {
+    margin: 8px 0;
+}
+
+.case p {
+    color: #9299ad;
+}
+
+button {
+    width: 100%;
+    padding: 13px;
+    border: 0;
+    border-radius: 12px;
+    background: #5865f2;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #6975ff;
+}
+
+.inventory {
+    margin-top: 35px;
+    background: #111522;
+    padding: 20px;
+    border-radius: 18px;
+}
+
+#result {
+    margin-top: 25px;
+    text-align: center;
+    min-height: 80px;
+}
+
+.item {
+    display: inline-block;
+    background: #1b2030;
+    border-radius: 15px;
+    padding: 18px 25px;
+    font-size: 20px;
+}
+
+.rarity {
+    color: #ffd166;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+@media(max-width:600px) {
+    .cases {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🎁 CaseDrop</div>
+    <div class="coins">🪙 <span id="coins">100</span></div>
+</header>
+
+<div class="container">
+
+<h1>Virtual Case Opening</h1>
+<p class="subtitle">
+    Case oching va noyob collectible'larni yig'ing!
+</p>
+
+<div class="cases">
+
+<div class="case">
+    <div class="case-icon">📦</div>
+    <h2>Starter Case</h2>
+    <p>10 🪙</p>
+    <button onclick="openCase(10, 'starter')">
+        CASE OCHISH
+    </button>
+</div>
+
+<div class="case">
+    <div class="case-icon">💎</div>
+    <h2>Diamond Case</h2>
+    <p>25 🪙</p>
+    <button onclick="openCase(25, 'diamond')">
+        CASE OCHISH
+    </button>
+</div>
+
+<div class="case">
+    <div class="case-icon">🔥</div>
+    <h2>Legendary Case</h2>
+    <p>50 🪙</p>
+    <button onclick="openCase(50, 'legendary')">
+        CASE OCHISH
+    </button>
+</div>
+
+<div class="case">
+    <div class="case-icon">🌌</div>
+    <h2>Galaxy Case</h2>
+    <p>75 🪙</p>
+    <button onclick="openCase(75, 'galaxy')">
+        CASE OCHISH
+    </button>
+</div>
+
+</div>
+
+<div id="result">
+    Case ochib, sovg'angizni oling! 🎁
+</div>
+
+<div class="inventory">
+    <h2>🎒 Inventar</h2>
+    <div id="inventory">
+        Hozircha item yo'q.
+    </div>
+</div>
+
+</div>
+
+<script>
+
+let coins = 100;
+let inventory = [];
+
+const items = {
+
+starter: [
+    ["🎨 Common Avatar", "Common"],
+    ["🎧 Headphones", "Rare"],
+    ["🎮 Gamepad", "Epic"],
+    ["👑 Golden Crown", "Legendary"]
+],
+
+diamond: [
+    ["💎 Diamond", "Rare"],
+    ["📱 Golden Phone", "Epic"],
+    ["🚗 Supercar", "Epic"],
+    ["🐉 Dragon", "Legendary"]
+],
+
+legendary: [
+    ["⚡ Lightning Aura", "Epic"],
+    ["🔥 Fire Aura", "Epic"],
+    ["🛸 UFO", "Legendary"],
+    ["👑 Royal Crown", "Legendary"]
+],
+
+galaxy: [
+    ["🌌 Galaxy Aura", "Epic"],
+    ["🌑 Black Hole", "Legendary"],
+    ["🐲 Cosmic Dragon", "Legendary"],
+    ["🌟 Galaxy King", "Mythic"]
+]
+
+};
+
+function openCase(price, type) {
+
+    if (coins < price) {
+        alert("🪙 Coin yetarli emas!");
+        return;
+    }
+
+    coins -= price;
+
+    document.getElementById("coins").innerText = coins;
+
+    let list = items[type];
+
+    let random = Math.floor(Math.random() * list.length);
+
+    let item = list[random][0];
+    let rarity = list[random][1];
+
+    let result = document.getElementById("result");
+
+    result.innerHTML = `
+        <div class="item">
+            🎉 ${item}
+            <div class="rarity">${rarity}</div>
+        </div>
+    `;
+
+    inventory.push(item);
+
+    updateInventory();
+}
+
+function updateInventory() {
+
+    let box = document.getElementById("inventory");
+
+    box.innerHTML = "";
+
+    inventory.forEach(function(item) {
+
+        let div = document.createElement("div");
+
+        div.style.padding = "8px";
+        div.innerText = "🎁 " + item;
+
+        box.appendChild(div);
+
+    });
+}
+
+</script>
+
+</body>
+  </html>
