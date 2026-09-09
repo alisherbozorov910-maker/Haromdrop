@@ -8,14 +8,14 @@
 </head>
 <body>
 
-  <!-- AUTH SECTION (Ro'yxatdan o'tish / Kirish) -->
+  <!-- AUTH SCREEN -->
   <div id="auth-screen" class="screen">
     <div class="auth-box">
       <h1>CASE OPENER</h1>
-      <p>O'yinga kirish uchun login va parol kiriting</p>
+      <p>O'yinga kirish yoki ro'yxatdan o'tish</p>
       
-      <input type="text" id="username-input" placeholder="Login...">
-      <input type="password" id="password-input" placeholder="Parol...">
+      <input type="text" id="username-input" placeholder="Login">
+      <input type="password" id="password-input" placeholder="Parol">
       
       <div class="auth-buttons">
         <button onclick="login()">Kirish</button>
@@ -25,55 +25,87 @@
     </div>
   </div>
 
-  <!-- MAIN GAME SECTION (O'yin qismi) -->
+  <!-- GAME SCREEN -->
   <div id="game-screen" class="screen hidden">
     <header>
       <div class="user-info">
-        <span id="user-display">Foydalanuvchi</span>
-        <div class="balance-box">
-          💰 Balans: <span id="balance-display">100</span> coin
-        </div>
+        👤 <span id="user-display">Foydalanuvchi</span> | 💰 Balans: <span id="balance-display">100</span> coin
       </div>
-      <button onclick="logout()" class="logout-btn">Chiqish</button>
+      <button class="menu-btn" onclick="toggleMenu()">☰</button>
     </header>
 
+    <!-- Side Menu -->
+    <div id="side-menu" class="side-menu hidden">
+      <div class="menu-header">
+        <h3>Menyu</h3>
+        <span class="close-menu" onclick="toggleMenu()">✕</span>
+      </div>
+      <button onclick="openTab('cases-tab')">📦 Case'lar Do'koni</button>
+      <button onclick="openTab('profile-tab')">👤 Shaxsiy Kabinet (Inventar)</button>
+      <button onclick="openTab('help-tab')">❓ Yordam</button>
+      <button onclick="logout()" class="logout-btn">Chiqish</button>
+    </div>
+
     <main class="container">
-      <h2>CASE'LAR DO'KONI</h2>
-      
-      <div class="cases-grid">
-        <!-- Temir Case -->
-        <div class="case-card iron">
-          <h3>Temir Case</h3>
-          <p class="price">15 Coin</p>
-          <button onclick="openCase('iron', 15)">Ochish</button>
+      <!-- TAB 1: Cases -->
+      <div id="cases-tab" class="tab-content">
+        <h2>CASE'LAR DO'KONI</h2>
+        <div class="cases-grid">
+          <div class="case-card iron">
+            <h3>Temir Case</h3>
+            <p class="price">15 Coin</p>
+            <button id="btn-iron" onclick="openCase('iron', 15)">Ochish</button>
+          </div>
+          <div class="case-card gold">
+            <h3>Oltin Case</h3>
+            <p class="price">30 Coin</p>
+            <button id="btn-gold" onclick="openCase('gold', 30)">Ochish</button>
+          </div>
+          <div class="case-card diamond">
+            <h3>Diamond Case</h3>
+            <p class="price">70 Coin</p>
+            <button id="btn-diamond" onclick="openCase('diamond', 70)">Ochish</button>
+          </div>
         </div>
 
-        <!-- Oltin Case -->
-        <div class="case-card gold">
-          <h3>Oltin Case</h3>
-          <p class="price">30 Coin</p>
-          <button onclick="openCase('gold', 30)">Ochish</button>
-        </div>
-
-        <!-- Diamond Case -->
-        <div class="case-card diamond">
-          <h3>Diamond Case</h3>
-          <p class="price">70 Coin</p>
-          <button onclick="openCase('diamond', 70)">Ochish</button>
+        <!-- Ruletka -->
+        <div id="roulette-section" class="case-box hidden">
+          <h3 id="current-case-title">Case</h3>
+          <div class="roulette-wrapper">
+            <div class="pointer"></div>
+            <div class="roulette" id="roulette"></div>
+          </div>
         </div>
       </div>
 
-      <!-- Ruletka paneli -->
-      <div id="roulette-section" class="case-box hidden">
-        <h3 id="current-case-title">Case</h3>
-        <div class="roulette-wrapper">
-          <div class="pointer"></div>
-          <div class="roulette" id="roulette"></div>
+      <!-- TAB 2: Shaxsiy Kabinet va Inventar -->
+      <div id="profile-tab" class="tab-content hidden">
+        <h2>SHAXSIY KABINET</h2>
+        <div class="profile-info">
+          <p>Foydalanuvchi: <b id="profile-name">---</b></p>
+          <p>Balans: <b id="profile-balance">0</b> coin</p>
+        </div>
+        
+        <h3>Mening Inventarim</h3>
+        <div id="inventory-grid" class="inventory-grid">
+          <!-- Buyumlar shu yerga tushadi -->
+        </div>
+      </div>
+
+      <!-- TAB 3: Yordam -->
+      <div id="help-tab" class="tab-content hidden">
+        <h2>YORDAM BO'LIMI</h2>
+        <div class="help-box">
+          <p><b>Qoidalar:</b></p>
+          <p>1. Case ochish uchun yetarli coin'ga ega bo'ling.</p>
+          <p>2. Yutgan buyumlaringiz inventarga tushadi.</p>
+          <p>3. Shaxsiy kabinetga o'tib, keraksiz buyumlarni sotib, coin olishingiz mumkin.</p>
+          <p>4. Kazino va real pul mavjud emas. Shunchaki o'yin-kulgu uchun!</p>
         </div>
       </div>
     </main>
 
-    <!-- Yutuq oynasi -->
+    <!-- Modal result -->
     <div id="result-modal" class="modal">
       <div class="modal-content">
         <h2>TABRIKLAYMIZ!</h2>
